@@ -52,16 +52,16 @@ let _ =
               (assoc (tuple_cells [ float ; float ]) @@ field (arg 0) "sprite") ;
             opt_arg "on_load"
               ~doc:"Fires when the sound is loaded"
-              (set_event [] void @@ field (arg 0) "onload") ;
+              (event [] void @@ field (arg 0) "onload") ;
             opt_arg "on_load_error"
               ~doc:"Fires when the sound fails to load"
-              (set_event [] void @@ field (arg 0) "onloaderror") ;
+              (event [] void @@ field (arg 0) "onloaderror") ;
             opt_arg "on_pause"
               ~doc:"Fires when the sound has been pauser"
-              (set_event [] void @@ field (arg 0) "onpause") ;
+              (event [] void @@ field (arg 0) "onpause") ;
             opt_arg "on_play"
               ~doc:"Fires when the sound begind playing"
-              (set_event [] void @@ field (arg 0) "onplay") ;
+              (event [] void @@ field (arg 0) "onplay") ;
             curry_arg "urls"
               ~doc:"The source URLs to the track(s) to be loaded for the sound.\n\
                     These should be in order of preference, howler.js will \
@@ -109,7 +109,7 @@ let _ =
             curry_arg "duration"
 	      ~doc:"Time in milliseconds to fade" (float @@ arg 1) ;
             opt_arg "on_complete"
-	      ~doc:"Fires when fade is complete" (set_event [] void @@ rest ()) ]
+	      ~doc:"Fires when fade is complete" (event [] void @@ rest ()) ]
         in group [
           map_method "sound" "fadeOut"  ~rename:"fade_out"
             ~doc:"Fade out the current sound and pause when finished"
