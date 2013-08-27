@@ -1148,11 +1148,11 @@ let raphael_component =
             def_type 
               ~doc:"the result of a parse operation"
               "parse_result" (public (variant [ constr "Error"
-                                                  ~guard:Guard.(field root "error" = int 1)
-
+                                                  Guard.(field root "error" = int 1)
                                                   ~doc:"unparsable string"
                                                   [] ;
                                                 constr "Color"
+						  Guard.tt
                                                   ~doc:"parsed RGB color (red, green, blue)"
                                                   [ (float @@ field root "r") ;
                                                     (float @@ field root "g") ;

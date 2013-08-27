@@ -54,7 +54,7 @@ let _ =
       Element.on_hover circle
 	~f_in:(fun _ ->
 	  let color = match Element.Data.get circle color with None -> assert false | Some c -> c in
-          Howler.play piano ;
+          Howler.play piano () ;
 	  Element.Attrs.(set_fill attrs (Some color) ;
 			 set_stroke_width attrs (Some (float (30 - i) /. 5.))) ;
 	  Animation.animate circle attrs 50.)
@@ -94,8 +94,8 @@ let _ =
   Element.Attrs.set_transform end_attrs (Some (Matrix.to_transform_string end_matrix)) ;
   Element.set_attrs group start_attrs ;
   Element.on_hover text
-    ~f_in:(fun _ -> Animation.pause text)
-    ~f_out:(fun _ -> Animation.resume text) ;
+    ~f_in:(fun _ -> Animation.pause text ())
+    ~f_out:(fun _ -> Animation.resume text ()) ;
   Animation.animate
     ~callback:(fun () -> looping_rotation ~start:(-45.) text 500.)
     group end_attrs 500.
