@@ -33,8 +33,8 @@ let scale =
   fun i -> scale.(i)
 
 let _ =
-  let canvas = Node.create "div" in
-  Node.append_child (Node.body ()) canvas ;
+  let canvas = Document.create "div" in
+  Document.append (Document.body ()) canvas ;
   let paper = raphael_at_node canvas 500 500 in
   Paper.set_start paper ;
   for i = 15 downto 0 do
@@ -74,7 +74,7 @@ let _ =
 	  ))
     )
   done ;
-  let text = Paper.text paper 0. 0. (backend ()) in
+  let text = Paper.text paper 0. 0. (backend_name ()) in
   let text_attrs = Element.Attrs.make () in
   Element.Attrs.set_font_size text_attrs (Some 16.) ;
   Element.Attrs.set_font_family text_attrs (Some "serif") ;

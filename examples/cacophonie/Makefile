@@ -10,7 +10,7 @@ libs.js:
 
 main.byte: main.ml
 	ocamlfind ocamlc -g -custom \
-          -package js_of_ocaml,howler,raphael \
+          -package howler,raphael,js_of_ocaml \
           $< -linkpkg -o $@
 
 clean:

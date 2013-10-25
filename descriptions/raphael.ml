@@ -14,8 +14,9 @@ let raphael_component =
   register_component 
     ~version:"2.1.0"
     ~author:"Dmitry Baranovskiy"
-    ~license:Goji_license.mit
-    ~grabber:Goji_grab.(sequence [
+    ~license:License.mit
+    ~depends:[ "browser" ]
+    ~grabber:Grab.(sequence [
       http_get
 	"http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js"
 	"goji_entry.js"
@@ -207,7 +208,7 @@ let raphael_component =
               ~doc:"Gives you a reference to the DOM object, so you can assign \
                     event handlers or just mess around.\n\
                     Note: Don't mess with it."
-              ~read_only:true (abbrv "JavaScript.node") ;
+              ~read_only:true (abbrv "Document.node") ;
             map_attribute "t" "id"
               ~doc:"Unique id of the element. Especially usesful when you want \
                     to listen to events of the element, because all events are \
@@ -410,10 +411,11 @@ let raphael_component =
               ~doc:"Adds event handlers for hover for the element."
               [ labeled_arg "f_in"
                   ~doc:"handler for hover in"
-                  ((callback [ curry_arg "event" (any @@ arg 0) ] void) @@ arg 0) ;
+                  ((event [ curry_arg "pos" (tuple_fields [ "x", int ; "y", int ] @@ arg 0) ] void) @@ arg 0) ;
                 labeled_arg "f_out"
                   ~doc:"handler for hover out"
-                  ((callback [ curry_arg "event" (any @@ arg 0) ] void) @@ arg 1) ] void ;
+                  ((event [ curry_arg "event" (tuple_fields [ "x", int ; "y", int ] @@ arg 0) ] void) @@ arg 1) ]
+	      void ;
             map_method "t" "touchcancel" ~rename:"on_touch_cancel" 
               ~doc:"Adds event handler for touchcancel for the element."
               [ labeled_arg "handler"
@@ -829,7 +831,7 @@ let raphael_component =
 
               [ labeled_arg "node"
                   ~doc:"the parent DOM node"
-                  ((abbrv "JavaScript.node") @@ arg 0) ;
+                  ((abbrv "Document.node") @@ arg 0) ;
                 labeled_arg "width"
                   ~doc:"the width in pixels"
                   (int @@ arg 1) ;
@@ -1548,7 +1550,7 @@ let raphael_component =
 
         [ labeled_arg "node"
             ~doc:"the parent DOM node"
-            ((abbrv "JavaScript.node") @@ arg 0) ;
+            ((abbrv "Document.node") @@ arg 0) ;
           labeled_arg "width"
             ~doc:"the width in pixels"
             (int @@ arg 1) ;
@@ -1614,7 +1616,12 @@ let raphael_component =
       map_global "supports_vml"
         ~doc:"[true] if browser supports VML."
         ~read_only:true (bool @@ field (global "Raphael") "vml") ;
+      def_type "backend" ~doc:"The type of supported back-ends."
+	(public (string_enum [ "SVG", "SVG" ; "VML", "VML" ; "NONE", "" ])) ;
       map_global "backend"
+        ~doc:"Can be SVG, VML or empty, depending on browser support."
+        ~read_only:true (abbrv "backend" @@ field (global "Raphael") "type") ;
+      map_global "backend_name"
         ~doc:"Can be SVG, VML or empty, depending on browser support."
         ~read_only:true (string @@ field (global "Raphael") "type") ;
     ] ;

@@ -13,8 +13,9 @@ let accelerometer_component = register_component
     ~doc:"Captures device motion in the x, y, and z direction."
     ~author:"Adobe Systems Inc."
     ~version:"3.0.0"
-    ~license:Goji_license.apache_v2
-    ~grabber:Goji_grab.(nop (** The JavaScript code is inserted by PhoneGap. *))
+    ~license:License.apache_v2
+    ~depends:[ "browser" ]
+    ~grabber:Grab.(nop (** The JavaScript code is inserted by PhoneGap. *))
     phonegap_package "Phonegap_accelerometer" [
     def_type 
       ~doc:"Contains Accelerometer data captured at a specific point in \

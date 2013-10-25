@@ -14,8 +14,9 @@ let _ =
   register_component
     ~version:"1.1.7"
     ~author:"Goldfire Studios"
-    ~license:Goji_license.mit
-    ~grabber:Goji_grab.(sequence [
+    ~license:License.mit
+    ~depends:[ "browser" ]
+    ~grabber:Grab.(sequence [
       http_get
 	"https://raw.github.com/goldfire/howler.js/\
          0b27ccd8dda0032db6c47cbd13a35edeacfc81ad/howler.js"

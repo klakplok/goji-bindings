@@ -11,7 +11,8 @@ let canvas_package =
 
 let canvas_component =
   register_component 
-    ~license:Goji_license.wtfpl
+    ~license:License.wtfpl
+    ~depends:[ "browser" ]
     ~doc:"Browser's native 2D raster drawing library"
     canvas_package "Canvas"
     [ def_type 
@@ -24,7 +25,7 @@ let canvas_component =
 	~doc:"A drawing context lets you draw on the canvas"
 	"gl_context" (abstract any) ;
       section "Canvas Element Management" [
-	inherits ([], "canvas") ([], "JavaScript.node") "as_node" ;
+	inherits ([], "canvas") ([], "Document.node") "as_node" ;
 	map_attribute "canvas" "width"
           ~doc:"Reflects the height HTML attribute, specifying the width of \
 		the coordinate space in CSS pixels."

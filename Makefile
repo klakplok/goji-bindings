@@ -1,4 +1,4 @@
-BINDINGS=canvas howler raphael box2d
+BINDINGS=canvas howler raphael box2d phonegap
 GENERATED=$(patsubst %, bindings/%, $(BINDINGS))
 
 .PHONY: clean examples

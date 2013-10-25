@@ -14,8 +14,9 @@ let box2d_component = register_component
     ~doc:"Two dimensional Physics Simulation Engine"
     ~author:"Uli Hecht"
     ~version:"2.1a.3"
-    ~license:Goji_license.zlib
-    ~grabber:Goji_grab.(sequence [
+    ~license:License.zlib
+    ~depends:[ "browser" ]
+    ~grabber:Grab.(sequence [
 	http_get "http://box2dweb.googlecode.com/files/Box2dWeb-2.1a.3.zip" "tmp.zip" ;
 	unzip "tmp.zip Box2dWeb-2.1.a.3.min.js" ;
 	rename "Box2dWeb-2.1.a.3.min.js" "goji_entry.js" ;
