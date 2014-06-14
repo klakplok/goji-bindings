@@ -38,7 +38,7 @@ let canvas_component =
           ~doc:"Obtain a 2D context, should work everywhere"
           [] 
 	  (abs "_"
-	     (set (arg 0) Const.(string "2d"))
+	     (set_const (arg 0) Const.(string "2d"))
 	     (call_method "getContext"))
           (abbrv "context") ;
 	def_method "canvas" "get_gl_context" 
@@ -46,7 +46,7 @@ let canvas_component =
 		WebGL"
           []
 	  (abs "_"
-	     (set (arg 0) Const.(string "webgl"))
+	     (set_const (arg 0) Const.(string "webgl"))
 	     (call_method "getContext"))
           (abbrv "gl_context") ;
       ] ;
