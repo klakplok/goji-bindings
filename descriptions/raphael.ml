@@ -208,7 +208,7 @@ let raphael_component =
               ~doc:"Gives you a reference to the DOM object, so you can assign \
                     event handlers or just mess around.\n\
                     Note: Don't mess with it."
-              ~read_only:true (abbrv "Document.node") ;
+              ~read_only:true (abbrv "Browser.DOM.node") ;
             map_attribute "t" "id"
               ~doc:"Unique id of the element. Especially usesful when you want \
                     to listen to events of the element, because all events are \
@@ -831,7 +831,7 @@ let raphael_component =
 
               [ labeled_arg "node"
                   ~doc:"the parent DOM node"
-                  ((abbrv "Document.node") @@ arg 0) ;
+                  ((abbrv "Browser.DOM.node") @@ arg 0) ;
                 labeled_arg "width"
                   ~doc:"the width in pixels"
                   (int @@ arg 1) ;
@@ -1550,7 +1550,7 @@ let raphael_component =
 
         [ labeled_arg "node"
             ~doc:"the parent DOM node"
-            ((abbrv "Document.node") @@ arg 0) ;
+            ((abbrv "Browser.DOM.node") @@ arg 0) ;
           labeled_arg "width"
             ~doc:"the width in pixels"
             (int @@ arg 1) ;
