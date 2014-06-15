@@ -25,7 +25,7 @@ let canvas_component =
 	~doc:"A drawing context lets you draw on the canvas"
 	"gl_context" (abstract any) ;
       section "Canvas Element Management" [
-	inherits ([], "canvas") ([], "Document.node") "as_node" ;
+	inherits ([], "canvas") ([], "Browser.DOM.node") "as_node" ;
 	map_attribute "canvas" "width"
           ~doc:"Reflects the height HTML attribute, specifying the width of \
 		the coordinate space in CSS pixels."
@@ -38,7 +38,7 @@ let canvas_component =
           ~doc:"Obtain a 2D context, should work everywhere"
           [] 
 	  (abs "_"
-	     (set (arg 0) Const.(string "2d"))
+	     (set_const (arg 0) Const.(string "2d"))
 	     (call_method "getContext"))
           (abbrv "context") ;
 	def_method "canvas" "get_gl_context" 
@@ -46,7 +46,7 @@ let canvas_component =
 		WebGL"
           []
 	  (abs "_"
-	     (set (arg 0) Const.(string "webgl"))
+	     (set_const (arg 0) Const.(string "webgl"))
 	     (call_method "getContext"))
           (abbrv "gl_context") ;
       ] ;

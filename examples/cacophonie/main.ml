@@ -7,6 +7,8 @@ open JavaScript
 open Raphael
 open Howler
 
+module Dom = Browser.DOM
+
 let looping_rotation ?(center = 0., 0.) ?(start = 0.) element duration =
   let rec loop deg =
     let matrix = Matrix.identity () in
@@ -33,8 +35,13 @@ let scale =
   fun i -> scale.(i)
 
 let _ =
-  let canvas = Document.create "div" in
-  Document.append (Document.body ()) canvas ;
+  let document = Dom.document in
+  let body =
+    match Dom.get_element_by_id document "body" with
+    | None -> assert false
+    | Some elt -> elt in
+  let canvas = Dom.create_element_mode "div" in
+  Dom.append_child (Dom.element_as_node body) canvas;
   let paper = raphael_at_node canvas 500 500 in
   Paper.set_start paper ;
   for i = 15 downto 0 do
